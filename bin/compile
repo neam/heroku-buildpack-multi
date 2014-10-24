@@ -10,6 +10,9 @@ function indent() {
   esac
 }
 
+# Show script name and line number when errors occur to make buildpack errors easier to debug
+trap 'echo "Script error in $0 on or near line ${LINENO}"' ERR
+
 unset GIT_DIR
 
 for BUILDPACK in $(cat $1/.buildpacks); do
